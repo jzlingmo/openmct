@@ -40,11 +40,13 @@ define([],function () {
      * @memberof platform/features/clock
      */
     return function installFollowIndicator(openmct, timerService) {
-        var indicator = openmct.indicators.create();
+        var indicator = openmct.indicators.simpleIndicator();
         var timer = timerService.getTimer();
-        var setIndicatorStatusFromTimer = setIndicatorStatus.bind(this, indicator);
-        
+      
+        var setIndicatorStatusFromTimer = setIndicatorStatus.bind(this, indicator);  
         setIndicatorStatusFromTimer(timer);
         timerService.on('change', setIndicatorStatusFromTimer);
+
+        openmct.indicators.add(indicator);
     };
 });
